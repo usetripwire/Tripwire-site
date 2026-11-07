@@ -17,7 +17,7 @@
  * botLive    Set to true once @usetripwirebot is posting replies, to mark the X bot section as live.
  */
 window.TRIPWIRE_CONFIG = {
-  apiUrl: "",
+  apiUrl: "https://tripwire-bot-production.up.railway.app",
   botLive: false,
   rpcUrl: "https://api.mainnet-beta.solana.com",
   xHandle: "usetripwire",
