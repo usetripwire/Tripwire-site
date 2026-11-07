@@ -20,7 +20,7 @@ window.TRIPWIRE_CONFIG = {
   botLive: false,
   rpcUrl: "https://api.mainnet-beta.solana.com",
   xHandle: "TripwireScan",
-  siteUrl: "https://tripwire.example",
+  siteUrl: "https://usetripwire.com",
   tokenCA: "",
   contact: "hello@tripwire.example"
 };
