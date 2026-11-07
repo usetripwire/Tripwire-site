@@ -7,7 +7,6 @@
   var CFG = window.TRIPWIRE_CONFIG || {};
   var RPC = CFG.rpcUrl || "https://api.mainnet-beta.solana.com";
   var HANDLE = CFG.xHandle || "usetripwire";
-  var BOT = CFG.botHandle || HANDLE;
   var SITE = (CFG.siteUrl || location.origin).replace(/\/$/, "");
 
   var TOKEN_PROGRAM = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
@@ -259,14 +258,14 @@
     }
 
     var link = SITE + "/?ca=" + mint;
-    var shareText = "Ran " + (meta.symbol ? "$" + meta.symbol : short(mint)) + " through @" + BOT + ": " +
+    var shareText = "Ran " + (meta.symbol ? "$" + meta.symbol : short(mint)) + " through @" + HANDLE + ": " +
       (trips ? trips + " of " + ran.length + " wires tripped." : "all " + ran.length + " wires clear.");
     kids.push(h("div", { class: "r-foot" }, [
       h("p", { text: full === "full"
         ? "Automated estimates from on-chain data. A clear result is not a guarantee."
         : full === "fallback"
           ? "Quick Scan only: the full scan service didn't answer, so only these checks ran. A clear result is not a guarantee."
-          : "Bundle, sniper, dev history, agent and wash checks arrive with the X bot. A clear result is not a guarantee." }),
+          : "Quick Scan only: the full scan isn't connected, so only these checks ran. A clear result is not a guarantee." }),
       h("div", { class: "r-actions" }, [
         h("a", { class: "btn btn-primary btn-sm", target: "_blank", rel: "noopener", href: "https://x.com/intent/tweet?text=" + encodeURIComponent(shareText) + "&url=" + encodeURIComponent(link), text: "Share on X" }),
         pair && pair.url ? h("a", { class: "btn btn-ghost btn-sm", target: "_blank", rel: "noopener", href: pair.url, text: "Chart" }) : null,
@@ -382,7 +381,6 @@
   function boot() {
     // X links + CA from config
     document.querySelectorAll("[data-x-link]").forEach(function (a) { a.href = "https://x.com/" + HANDLE; });
-    document.querySelectorAll("[data-x-bot-link]").forEach(function (a) { a.href = "https://x.com/" + BOT; });
     var foot = document.getElementById("foot-ca");
     if (foot && CFG.tokenCA) {
       foot.replaceChildren(document.createTextNode("$TRIP CA: "), h("span", { text: CFG.tokenCA }), document.createTextNode(" "), copyBtn(CFG.tokenCA, "Copy $TRIP contract address"));
@@ -400,7 +398,6 @@
         h("p", { style: "margin:8px 0 0", text: "Paste a Solana token address to check bundles, snipers, dev history, agents, wash volume, exit liquidity, authority and holders." })
       );
     }
-    if (CFG.botLive) document.querySelectorAll("[data-bot-pill]").forEach(function (p) { livePill(p, "Live"); });
 
     // mobile menu
     var mb = document.querySelector(".menu-btn"), nl = document.getElementById("nav-links");

@@ -7,21 +7,17 @@
  *            RESTRICT IT TO YOUR DOMAIN in their dashboard, since anything
  *            in this file is visible to visitors.
  * xHandle    The main Tripwire X account, without the @ (used for "Follow on X").
- * botHandle  The bot's X handle, without the @.
  * siteUrl    Your live domain, no trailing slash (used for share links).
  * tokenCA    Leave empty until $TRIP launches. Once set, it shows in the footer.
  * contact    Email shown on the Terms and Privacy pages.
- * apiUrl     Your Tripwire server (the bot folder), e.g. "https://tripwire-bot.up.railway.app".
- *            When set, scans run all eight wires there and the "With X bot" labels flip to "Live now".
+ * apiUrl     Your Tripwire scan server, e.g. "https://tripwire-bot.up.railway.app".
+ *            When set, scans run all eight wires there and the wire labels show "Live now".
  *            Leave empty to run only the three-wire Quick Scan in the browser.
- * botLive    Set to true once @usetripwirebot is posting replies, to mark the X bot section as live.
  */
 window.TRIPWIRE_CONFIG = {
   apiUrl: "https://tripwire-bot-production.up.railway.app",
-  botLive: false,
   rpcUrl: "https://mainnet.helius-rpc.com/?api-key=11746151-9b56-4160-9df3-cc185ff1bfa5",
   xHandle: "usetripwire",
-  botHandle: "usetripwirebot",
   siteUrl: "https://usetripwire.com",
   tokenCA: "",
   contact: "hello@tripwire.example"
