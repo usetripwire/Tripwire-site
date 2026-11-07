@@ -157,8 +157,9 @@
     if (!pairs.length) return { name: "Exit", tripped: true, items: ["No trading pool found on DexScreener. You may not be able to sell."] };
     var p = pairs[0];
     var liq = (p.liquidity && p.liquidity.usd) || 0;
-    if (!liq && p.dexId === "pumpfun") {
-      return { name: "Exit", na: true, items: ["Still on the pump.fun bonding curve, so sells go back into the curve instead of a pool. Pool depth is checked after it graduates."] };
+    if (!liq) {
+      var where = p.dexId === "pumpfun" ? "the pump.fun bonding curve" : p.dexId ? "a " + p.dexId + " launch curve" : "a launch curve";
+      return { name: "Exit", na: true, items: ["Still on " + where + ", which doesn't report pool liquidity, so sells go back into the curve. Pool depth is checked after it graduates."] };
     }
     // Constant-product estimate: the quote side is about half the pool's USD value.
     var q = liq / 2;
@@ -179,7 +180,7 @@
     resultEl.setAttribute("aria-busy", "true");
     resultEl.replaceChildren(h("div", { class: "loading" }, [
       h("div", { class: "spinner", "aria-hidden": "true" }),
-      h("span", { text: "Tripping the wires on " + short(mint) + "… A full scan reads the whole launch, so it can take up to a minute." })
+      h("span", { text: "Tripping the wires on " + short(mint) + "… A full scan reads the whole launch, so it can take a minute or two." })
     ]));
   }
 
@@ -306,7 +307,7 @@
 
   // Full eight-wire scan from the Tripwire server (config.apiUrl)
   function fullScan(mint) {
-    return fetch(API + "/api/scan?ca=" + encodeURIComponent(mint), { signal: withTimeout(120000) }).then(function (r) {
+    return fetch(API + "/api/scan?ca=" + encodeURIComponent(mint), { signal: withTimeout(180000) }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
         if (r.status === 400 || r.status === 422) { var e = new Error(j.message || "That address isn't a token mint."); e.final = true; throw e; }
         if (!r.ok || !j.checks) throw new Error("api_" + r.status);
