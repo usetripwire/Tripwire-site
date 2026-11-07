@@ -95,11 +95,16 @@
     return fetch("https://api.dexscreener.com/latest/dex/tokens/" + mint, { signal: withTimeout(15000) })
       .then(function (r) { if (!r.ok) throw new Error("dex_http_" + r.status); return r.json(); })
       .then(function (j) {
-        return (j.pairs || []).filter(function (p) {
+        var pairs = (j.pairs || []).filter(function (p) {
           return p.chainId === "solana" && p.baseToken && p.baseToken.address === mint;
-        }).sort(function (a, b) {
-          return ((b.liquidity && b.liquidity.usd) || 0) - ((a.liquidity && a.liquidity.usd) || 0);
         });
+        // Don't trust a pool claiming more liquidity than the coin's market cap (bad data or a fake pool)
+        var liq = function (p) { return (p.liquidity && p.liquidity.usd) || 0; };
+        var vol = function (p) { return (p.volume && p.volume.h24) || 0; };
+        var busiest = pairs.slice().sort(function (a, b) { return vol(b) - vol(a); })[0];
+        var ref = busiest ? (busiest.marketCap || busiest.fdv || 0) : 0;
+        pairs.forEach(function (p) { p._suspect = !!(ref && pairs.length > 1 && liq(p) > ref * 1.05); });
+        return pairs.sort(function (a, b) { return (a._suspect - b._suspect) || (liq(b) - liq(a)); });
       });
   }
 
