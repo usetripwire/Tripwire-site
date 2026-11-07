@@ -107,9 +107,12 @@
   function checkAuthority(mintAcc) {
     var info = mintAcc.data.parsed.info;
     var items = [], tripped = false;
-    if (info.mintAuthority) { tripped = true; items.push("Mint authority is active: more supply can be created (" + short(info.mintAuthority) + ")."); }
+    var BURN = "11111111111111111111111111111111";
+    if (info.mintAuthority === BURN) items.push("Mint authority set to the system program (burned): supply is fixed.");
+    else if (info.mintAuthority) { tripped = true; items.push("Mint authority is active: more supply can be created (" + short(info.mintAuthority) + ")."); }
     else items.push("Mint authority revoked: supply is fixed.");
-    if (info.freezeAuthority) { tripped = true; items.push("Freeze authority is active: holder wallets can be frozen (" + short(info.freezeAuthority) + ")."); }
+    if (info.freezeAuthority === BURN) items.push("Freeze authority set to the system program (burned).");
+    else if (info.freezeAuthority) { tripped = true; items.push("Freeze authority is active: holder wallets can be frozen (" + short(info.freezeAuthority) + ")."); }
     else items.push("Freeze authority revoked.");
     if (mintAcc.owner === TOKEN_2022) {
       (info.extensions || []).forEach(function (ext) {
@@ -168,7 +171,7 @@
     return {
       name: "Exit", tripped: tripped, items: [
         "Deepest pool: " + usd(liq) + " liquidity on " + (p.dexId || "a DEX") + ".",
-        "Selling " + usd(T.sellUsd) + " would move the price about " + pct(slip) + " (estimate)."
+        "Selling " + usd(T.sellUsd) + " would move the price " + (slip < 0.1 ? "less than 0.1%" : "about " + pct(slip)) + " (estimate)."
       ]
     };
   }
