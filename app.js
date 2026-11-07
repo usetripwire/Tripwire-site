@@ -98,15 +98,11 @@
         var pairs = (j.pairs || []).filter(function (p) {
           return p.chainId === "solana" && p.baseToken && p.baseToken.address === mint;
         });
-        // Don't trust a pool claiming more liquidity than the coin is worth by its own price,
-        // or whose price puts the coin at 20x+ every other pool's market cap (bad data or a fake pool)
+        // Don't trust a pool claiming more liquidity than it could hold by its own price
+        // (a pool is two sides, so at most ~2x market cap): bad data or a fake pool
         var liq = function (p) { return (p.liquidity && p.liquidity.usd) || 0; };
         var mc = function (p) { return p.marketCap || p.fdv || 0; };
-        var median = function (xs) { var a = xs.filter(function (x) { return x > 0; }).sort(function (x, y) { return x - y; }); return a.length ? a[Math.floor(a.length / 2)] : 0; };
-        pairs.forEach(function (p) {
-          var own = mc(p), others = median(pairs.filter(function (q) { return q !== p; }).map(mc));
-          p._suspect = pairs.length > 1 && liq(p) > 0 && ((own > 0 && liq(p) > own * 2.05) || (others > 0 && own > others * 20 && liq(p) > others));
-        });
+        pairs.forEach(function (p) { var own = mc(p); p._suspect = pairs.length > 1 && own > 0 && liq(p) > own * 2.05; });
         return pairs.sort(function (a, b) { return (a._suspect - b._suspect) || (liq(b) - liq(a)); });
       });
   }
