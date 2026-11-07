@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tripwire — Know before you ape</title>
+<meta name="description" content="Free Solana memecoin scanner. Paste a contract address to check mint and freeze authority, holder concentration and exit liquidity in seconds.">
+<meta name="theme-color" content="#0C0D0A">
+<link rel="canonical" href="https://tripwire.example/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tripwire">
+<meta property="og:title" content="Tripwire — Know before you ape">
+<meta property="og:description" content="Paste a Solana contract address. See what the chart hides.">
+<meta property="og:url" content="https://tripwire.example/">
+<meta property="og:image" content="https://tripwire.example/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TripwireScan">
+<meta name="twitter:title" content="Tripwire — Know before you ape">
+<meta name="twitter:description" content="Paste a Solana contract address. See what the chart hides.">
+<meta name="twitter:image" content="https://tripwire.example/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<script src="/config.js" defer></script>
+<script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Tripwire home">
+      <svg width="30" height="30" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M16 64 H42 L54 32 L68 90 L78 64 H104" stroke="#FF7A1A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="64" r="8" fill="#0C0D0A" stroke="#FF7A1A" stroke-width="7"/><circle cx="106" cy="64" r="8" fill="#0C0D0A" stroke="#FF7A1A" stroke-width="7"/></svg>
+      <span>TRIPWIRE</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#scan">Quick Scan</a>
+      <a href="#wires">Full scan</a>
+      <a href="#watch">Watch</a>
+      <a href="#bot">X bot</a>
+      <a href="#token">$TRIP</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="btn btn-primary btn-sm" data-x-link href="https://x.com/TripwireScan" target="_blank" rel="noopener">Follow on X</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="scan">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Quick Scan · Live on Solana</p>
+      <h1>Know before<br>you ape.</h1>
+      <p class="sub">Paste a Solana contract address. In seconds, Tripwire checks whether the dev can still print or freeze, how much supply a few wallets control, and what happens when you try to sell.</p>
+      <form class="scan-form" id="scan-form" novalidate>
+        <label for="ca">Token contract address (mint)</label>
+        <input id="ca" name="ca" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 7xKq…pump" aria-describedby="ca-note ca-error">
+        <button class="btn btn-primary" id="scan-btn" type="submit">Trip it</button>
+      </form>
+      <p class="form-error" id="ca-error" role="alert"></p>
+      <p class="form-note" id="ca-note">Free and no wallet needed. Checks run in your browser against public on-chain and DEX data.</p>
+    </div>
+
+    <div class="result" id="result" aria-live="polite" aria-busy="false">
+      <div class="placeholder">
+        <p style="margin:0;font-weight:600;color:var(--text)">Three live wires</p>
+        <ol>
+          <li><strong>Authority:</strong> can the dev mint more supply, freeze wallets or skim a transfer fee?</li>
+          <li><strong>Holders:</strong> how much of the supply sits with the top 10 wallets, pools excluded?</li>
+          <li><strong>Exit:</strong> how deep is the pool, and how much would a $1,000 sell move the price?</li>
+        </ol>
+        <p class="dim" style="margin:14px 0 0;font-size:14px">Bundle, sniper, dev history, agent and wash checks arrive with the X bot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap pad split">
+    <div class="side">
+      <p class="eyebrow">The narrative</p>
+      <h2>The trenches got rigged. So we strung wire.</h2>
+    </div>
+    <div class="main prose">
+      <p>Every new coin looks the same on a chart. Behind half of them sits a dev who bundled a third of the supply across fresh wallets, snipers who landed in block zero, and a wall of volume that is just the same SOL going in circles.</p>
+      <p>Then the bots arrived. AI agent wallets went from roughly 8% to 34% of daily Solana memecoin DEX volume between March and June 2026, trading several times as often as humans. Often you are not reading the crowd. You are reading machines reading each other.</p>
+      <p>And when it goes wrong, it goes wrong fast. The dev sells, the bundle unwinds, the liquidity disappears, and by the time the candle prints, the exit is gone.</p>
+      <p class="strong">Soldiers strung tripwires so nobody crept up in the dark. Tripwire does the same for the memecoin trenches: it checks the ground before you step in, and keeps watch while you're there.</p>
+    </div>
+  </div>
+</section>
+
+<section id="wires">
+  <div class="wrap pad">
+    <p class="eyebrow">The full scan · six wires</p>
+    <h2>Six wires. One read.</h2>
+    <p class="lede">The full scan needs our own Solana indexer, which tracks funding trails and block positions across every launch. It arrives with @TripwireScan on X. Every trip will link to the wallets and transactions behind it.</p>
+    <div class="grid">
+      <div class="card"><div class="card-top"><h3>Bundle wire</h3><span class="pill soon" data-full-pill>With X bot</span></div><p>Clusters wallets funded from one source that bought in the same block or transaction, and shows how much supply they really hold together.</p></div>
+      <div class="card"><div class="card-top"><h3>Sniper wire</h3><span class="pill soon" data-full-pill>With X bot</span></div><p>Tags buys that landed in the first blocks after liquidity, and tracks whether those snipers are still holding or already unloading.</p></div>
+      <div class="card"><div class="card-top"><h3>Dev history</h3><span class="pill soon" data-full-pill>With X bot</span></div><p>Follows the deployer back through every coin it launched: how many, how they ended, and whether its wallets fed the current holders.</p></div>
+      <div class="card"><div class="card-top"><h3>Agent wire</h3><span class="pill soon" data-full-pill>With X bot</span></div><p>Separates agent wallets from human ones by trade rhythm and fingerprint, so you know how much of the buying pressure is people.</p></div>
+      <div class="card"><div class="card-top"><h3>Wash wire</h3><span class="pill soon" data-full-pill>With X bot</span></div><p>Finds volume that loops between related wallets and strips it out, so the number you see is volume that actually changed hands.</p></div>
+      <div class="card"><div class="card-top"><h3>Exit wire</h3><span class="pill live"><span class="dot"></span>Live now</span></div><p>Estimates what a sell does before you buy: pool depth, and how far price slips at a typical size. The Quick Scan runs this today.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="watch">
+  <div class="wrap pad">
+    <div class="section-head"><p class="eyebrow">Tripwire Watch · After you buy</p><span class="pill soon">Phase 2</span></div>
+    <h2>Already in? We'll keep watch.</h2>
+    <p class="lede">A scan tells you what a coin looks like right now. Watch tells you the moment that changes. Point the bot at a coin you hold, and it listens to the dev, the bundle, the snipers, the whales and the pool, around the clock.</p>
+    <div class="grid sm">
+      <div class="card"><p class="step-n">01 · Set it</p><p class="cmd">@TripwireScan watch [CA]</p><p>The bot confirms the watch in reply and starts listening.</p></div>
+      <div class="card"><p class="step-n">02 · We listen</p><p>The deployer, its linked wallets, the bundle cluster, early snipers, top holders and the pool are all tracked live, trade by trade.</p></div>
+      <div class="card"><p class="step-n">03 · It trips</p><p>When a wire trips, the bot replies in your watch thread within seconds, so X notifies you right away.</p></div>
+      <div class="card"><p class="step-n">04 · You decide</p><p class="cmd">@TripwireScan unwatch [CA]</p><p>Tripwire never trades for you. It tells you what moved, and you make the call.</p></div>
+    </div>
+
+    <h3 class="mt" style="font-size:28px;margin-bottom:24px">Six watch wires</h3>
+    <div class="grid">
+      <div class="rule"><h4>Dev move</h4><p>The deployer or a wallet it funded sells, or moves tokens to a new wallet or an exchange.</p></div>
+      <div class="rule"><h4>Bundle unwind</h4><p>Wallets in the launch bundle start selling together, even when each sale is small.</p></div>
+      <div class="rule"><h4>Liquidity pull</h4><p>LP is removed, unlocked, or drops sharply within minutes.</p></div>
+      <div class="rule"><h4>Sniper exit</h4><p>The block-zero snipers sell a large share of what they still hold.</p></div>
+      <div class="rule"><h4>Whale dump</h4><p>A top holder sells a large part of their position in one go.</p></div>
+      <div class="rule"><h4>Authority change</h4><p>Mint, freeze, metadata or transfer-fee settings on the token change.</p></div>
+    </div>
+
+    <h3 class="mt" style="font-size:28px;margin-bottom:12px">Watch slots</h3>
+    <p class="muted" style="max-width:720px;margin:0 0 24px">How many coins you can watch, and for how long, depends on the $TRIP held in the wallet linked to your X account. Holding is all it takes. Nothing gets locked or spent. Exact amounts are published at launch.</p>
+    <div class="grid sm tiers">
+      <div class="card"><h3>Free</h3><p class="price" style="color:var(--dim)">No $TRIP needed</p><p>One coin at a time, for a short window. Enough to try it.</p></div>
+      <div class="card"><h3>Picket</h3><p class="price">Smallest holding</p><p>A handful of coins, each watched for days.</p></div>
+      <div class="card"><h3>Patrol</h3><p class="price">Mid holding</p><p>More coins, each watched for weeks.</p></div>
+      <div class="card hl"><h3>Garrison</h3><p class="price">Largest holding</p><p>The most coins, watched until you remove them, plus custom thresholds.</p></div>
+    </div>
+    <p class="note">Alerts on X are public replies. Private browser push alerts come with the web app in Phase 3.</p>
+  </div>
+</section>
+
+<section id="bot">
+  <div class="wrap pad">
+    <div class="section-head"><p class="eyebrow">The X bot</p><span class="pill soon" data-bot-pill>Launching soon</span></div>
+    <h2>It lives where the trenches live.</h2>
+    <p class="lede">@TripwireScan will be a fully automated account, labeled as automated on X. It never replies to anyone uninvited. It answers when you tag it, and posts its own reports on its timeline.</p>
+    <div class="grid">
+      <div class="card"><p class="step-n">Scan</p><p class="cmd">@TripwireScan [CA]</p><p>Reply under any post with a contract address, or post one yourself. The bot replies with every wire’s result and a link to the full report.</p></div>
+      <div class="card"><p class="step-n">Watch</p><p class="cmd">@TripwireScan watch [CA]<br>@TripwireScan unwatch [CA]<br>@TripwireScan watches</p><p>Start or stop watching a coin, or list your active watches. Alerts arrive in the thread where you set the watch.</p></div>
+      <div class="card"><p class="step-n">On its own timeline</p><p>A daily trench report covering launches scanned, the share that tripped and the most common wire, plus live alerts on the most-watched coins.</p></div>
+    </div>
+    <div class="grid mt">
+      <div class="rule"><h4>Only when tagged</h4><p>Every reply goes into a thread started by someone who tagged the bot. That is X's rule for automated replies, and ours.</p></div>
+      <div class="rule"><h4>Facts, not verdicts</h4><p>Replies say what the chain shows: which wires tripped and why. Never “buy,” “sell” or “scam.”</p></div>
+      <div class="rule"><h4>One real account</h4><p>@TripwireScan links back to this site. Any other account claiming to be Tripwire is fake.</p></div>
+    </div>
+    <p style="margin:40px 0 0"><a class="btn btn-ghost" data-x-link href="https://x.com/TripwireScan" target="_blank" rel="noopener">Follow @TripwireScan for launch</a></p>
+  </div>
+</section>
+
+<section class="alt" id="token">
+  <div class="wrap pad split">
+    <div class="side">
+      <div class="section-head"><p class="eyebrow">The token</p><span class="pill soon">Not launched</span></div>
+      <h2>$TRIP is the key, not the payout.</h2>
+      <p class="muted" style="font-size:18px;margin:0">You will use $TRIP to unlock and run the tools. It does not pay holders a share of anything.</p>
+      <div class="card not">
+        <h3 style="font-size:19px;margin-bottom:12px">What $TRIP is not</h3>
+        <ul><li>No revenue share or dividends</li><li>No staking yield or promised returns</li><li>No claim on the team or the treasury</li></ul>
+      </div>
+    </div>
+    <div class="main grid sm">
+      <div class="card"><h3>Hold for watch slots</h3><p>Your holdings set your Watch tier: how many coins you can watch, for how long, and whether you get custom thresholds.</p></div>
+      <div class="card"><h3>Hold for scans</h3><p>The same linked wallet lifts your daily bot scan limit and moves you up the reply queue.</p></div>
+      <div class="card"><h3>Pay past your limit</h3><p>Extra scans and extra watches are paid in $TRIP, and part of every payment is burned.</p></div>
+      <div class="card"><h3>Stake for the API</h3><p>Bot builders lock $TRIP for API keys covering scans and watch streams. Unlock after a short cooldown.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap pad">
+    <p class="eyebrow">Clean launch</p>
+    <h2>We trip our own wire first.</h2>
+    <p class="lede" style="margin-bottom:40px">The product ships before the token. When $TRIP launches, paste its CA into the Quick Scan above and check it yourself.</p>
+    <div class="checklist">
+      <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 L8 14 L16 6"/></svg><span>No bundled supply at launch</span></div>
+      <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 L8 14 L16 6"/></svg><span>Mint and freeze authority revoked</span></div>
+      <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 L8 14 L16 6"/></svg><span>Team allocation published and locked</span></div>
+      <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 L8 14 L16 6"/></svg><span>Team wallets published in advance</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="roadmap">
+  <div class="wrap pad">
+    <p class="eyebrow">Roadmap</p>
+    <h2>Product first. Token second.</h2>
+    <div class="grid sm" style="margin-top:40px">
+      <div class="card hl"><div class="card-top"><p class="step-n" style="margin:0">Phase 1</p><span class="pill live"><span class="dot"></span>In progress</span></div><h3>Quick Scan + X bot</h3><p>The web Quick Scan is live now. Next, @TripwireScan answers tags with full six-wire readouts. Free, with no token yet.</p></div>
+      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 2</p></div><h3>$TRIP + Watch</h3><p>A clean launch, then watch alerts on X, wallet linking and holder tiers.</p></div>
+      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 3</p></div><h3>Web app</h3><p>Full reports, a watch dashboard, private push alerts and custom thresholds.</p></div>
+      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 4</p></div><h3>API + extension</h3><p>A public API for bot builders, a browser extension, and the first EVM chains.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-top">
+      <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M16 64 H42 L54 32 L68 90 L78 64 H104" stroke="#FF7A1A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="64" r="8" fill="#0C0D0A" stroke="#FF7A1A" stroke-width="7"/><circle cx="106" cy="64" r="8" fill="#0C0D0A" stroke="#FF7A1A" stroke-width="7"/></svg><span>TRIPWIRE</span></a>
+      <div class="foot-links">
+        <a data-x-link href="https://x.com/TripwireScan" target="_blank" rel="noopener">X @TripwireScan</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+      </div>
+    </div>
+    <p class="foot-ca" id="foot-ca">$TRIP CA: not launched yet. The only real address will be posted here and by @TripwireScan. Anything else is fake.</p>
+    <p class="foot-legal">Tripwire flags risk. It cannot rule risk out. Quick Scan results are automated estimates from public on-chain and DEX data, may be incomplete or delayed, and are not financial advice. $TRIP, once launched, is a utility token for accessing Tripwire tools and carries no right to profits, revenue or returns. Memecoins are extremely risky, and you can lose everything you put in.</p>
+  </div>
+</footer>
+</body>
+</html>
