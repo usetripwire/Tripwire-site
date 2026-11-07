@@ -105,7 +105,7 @@
         var median = function (xs) { var a = xs.filter(function (x) { return x > 0; }).sort(function (x, y) { return x - y; }); return a.length ? a[Math.floor(a.length / 2)] : 0; };
         pairs.forEach(function (p) {
           var own = mc(p), others = median(pairs.filter(function (q) { return q !== p; }).map(mc));
-          p._suspect = pairs.length > 1 && liq(p) > 0 && ((own > 0 && liq(p) > own * 1.05) || (others > 0 && own > others * 20 && liq(p) > others));
+          p._suspect = pairs.length > 1 && liq(p) > 0 && ((own > 0 && liq(p) > own * 2.05) || (others > 0 && own > others * 20 && liq(p) > others));
         });
         return pairs.sort(function (a, b) { return (a._suspect - b._suspect) || (liq(b) - liq(a)); });
       });
