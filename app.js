@@ -6,7 +6,8 @@
 
   var CFG = window.TRIPWIRE_CONFIG || {};
   var RPC = CFG.rpcUrl || "https://api.mainnet-beta.solana.com";
-  var HANDLE = CFG.xHandle || "TripwireScan";
+  var HANDLE = CFG.xHandle || "usetripwire";
+  var BOT = CFG.botHandle || HANDLE;
   var SITE = (CFG.siteUrl || location.origin).replace(/\/$/, "");
 
   var TOKEN_PROGRAM = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
@@ -258,7 +259,7 @@
     }
 
     var link = SITE + "/?ca=" + mint;
-    var shareText = "Ran " + (meta.symbol ? "$" + meta.symbol : short(mint)) + " through @" + HANDLE + ": " +
+    var shareText = "Ran " + (meta.symbol ? "$" + meta.symbol : short(mint)) + " through @" + BOT + ": " +
       (trips ? trips + " of " + ran.length + " wires tripped." : "all " + ran.length + " wires clear.");
     kids.push(h("div", { class: "r-foot" }, [
       h("p", { text: full === "full"
@@ -381,6 +382,7 @@
   function boot() {
     // X links + CA from config
     document.querySelectorAll("[data-x-link]").forEach(function (a) { a.href = "https://x.com/" + HANDLE; });
+    document.querySelectorAll("[data-x-bot-link]").forEach(function (a) { a.href = "https://x.com/" + BOT; });
     var foot = document.getElementById("foot-ca");
     if (foot && CFG.tokenCA) {
       foot.replaceChildren(document.createTextNode("$TRIP CA: "), h("span", { text: CFG.tokenCA }), document.createTextNode(" "), copyBtn(CFG.tokenCA, "Copy $TRIP contract address"));
