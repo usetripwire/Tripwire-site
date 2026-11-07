@@ -422,6 +422,13 @@
     input.addEventListener("paste", function () {
       setTimeout(function () { if (B58.test(input.value.trim())) scan(input.value); }, 0);
     });
+    // let other scripts (Radar) open a full scan
+    window.tripwireScan = function (mint) {
+      input.value = mint;
+      var top = document.getElementById("scan");
+      if (top) top.scrollIntoView({ behavior: "smooth" });
+      scan(mint);
+    };
     var q = new URLSearchParams(location.search).get("ca");
     if (q) { input.value = q; scan(q); }
   }

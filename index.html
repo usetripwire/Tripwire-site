@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="/styles.css">
 <script src="/config.js" defer></script>
 <script src="/app.js" defer></script>
+<script src="/radar.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -46,7 +47,7 @@
     <nav class="nav-links" id="nav-links" aria-label="Main">
       <a href="#scan">Scan</a>
       <a href="#wires">Wires</a>
-      <a href="#watch">Watch</a>
+      <a href="#radar">Radar</a>
       <a href="#token">$TRIP</a>
       <a href="#roadmap">Roadmap</a>
       <a class="btn btn-primary btn-sm" data-x-link href="https://x.com/usetripwire" target="_blank" rel="noopener">Follow on X</a>
@@ -85,7 +86,40 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" id="radar">
+  <div class="wrap pad">
+    <div class="section-head"><p class="eyebrow">Tripwire Radar · For $TRIP holders</p><span class="pill soon" id="radar-pill">Opens at $TRIP launch</span></div>
+    <h2>See clean launches first.</h2>
+    <p class="lede">Radar picks up every coin that graduates from pump.fun, waits for its first few minutes of trading, then runs the full scan on its own. Results land here as they finish. Hold <strong>100,000 $TRIP</strong> to see them in real time. Everyone else gets a short preview, 15 minutes late.</p>
+
+    <div class="radar-gate card" id="radar-gate" aria-live="polite">
+      <div class="radar-gate-text">
+        <p class="radar-gate-title" id="radar-gate-title">Preview mode</p>
+        <p class="radar-gate-sub" id="radar-gate-sub">Connect a wallet holding 100,000 $TRIP to unlock the live feed.</p>
+      </div>
+      <div class="radar-gate-actions" id="radar-gate-actions">
+        <button class="btn btn-primary btn-sm" id="radar-connect" type="button">Connect wallet</button>
+      </div>
+    </div>
+
+    <div class="radar-bar">
+      <label class="radar-toggle"><input type="checkbox" id="radar-clean"> Clean only</label>
+      <span class="dim" id="radar-updated"></span>
+    </div>
+    <div class="radar-feed" id="radar-feed">
+      <p class="radar-empty">Loading Radar…</p>
+    </div>
+
+    <div class="grid sm mt">
+      <div class="rule"><h4>Finds graduations</h4><p>Every pump.fun coin that fills its bonding curve, which is the clearest early sign of real demand.</p></div>
+      <div class="rule"><h4>Scans them for you</h4><p>All eight wires, run automatically after the first few minutes of trading, on coins with real liquidity.</p></div>
+      <div class="rule"><h4>Holders see it live</h4><p>Sign in by signing a free message with your wallet. No transaction, no approval, nothing leaves your wallet.</p></div>
+    </div>
+    <p class="note">Radar lists scan results, not recommendations. A clean scan can still go to zero. Never buy anything because it showed up here.</p>
+  </div>
+</section>
+
+<section>
   <div class="wrap pad split">
     <div class="side">
       <p class="eyebrow">The narrative</p>
@@ -95,7 +129,7 @@
       <p>Every new coin looks the same on a chart. Behind half of them sits a dev who bundled a third of the supply across fresh wallets, snipers who landed in block zero, and a wall of volume that is just the same SOL going in circles.</p>
       <p>Then the bots arrived. AI agent wallets went from roughly 8% to 34% of daily Solana memecoin DEX volume between March and June 2026, trading several times as often as humans. Often you are not reading the crowd. You are reading machines reading each other.</p>
       <p>And when it goes wrong, it goes wrong fast. The dev sells, the bundle unwinds, the liquidity disappears, and by the time the candle prints, the exit is gone.</p>
-      <p class="strong">Soldiers strung tripwires so nobody crept up in the dark. Tripwire does the same for the memecoin trenches: it checks the ground before you step in, and keeps watch while you're there.</p>
+      <p class="strong">Soldiers strung tripwires so nobody crept up in the dark. Tripwire does the same for the memecoin trenches: it checks the ground before you step in, and scouts ahead so holders see clean launches first.</p>
     </div>
   </div>
 </section>
@@ -116,40 +150,6 @@
   </div>
 </section>
 
-<section class="alt" id="watch">
-  <div class="wrap pad">
-    <div class="section-head"><p class="eyebrow">Tripwire Watch · After you buy</p><span class="pill soon">Phase 2</span></div>
-    <h2>Already in? We'll keep watch.</h2>
-    <p class="lede">A scan tells you what a coin looks like right now. Watch tells you the moment that changes. Tap Watch on a coin you hold, and Tripwire listens to the dev, the bundle, the snipers, the whales and the pool, around the clock.</p>
-    <div class="grid sm">
-      <div class="card"><p class="step-n">01 · Set it</p><p>Scan a coin, tap <strong>Watch</strong>, and allow notifications. No X account and no app to install.</p></div>
-      <div class="card"><p class="step-n">02 · We listen</p><p>The deployer, its linked wallets, the bundle cluster, early snipers, top holders and the pool are all tracked live, trade by trade.</p></div>
-      <div class="card"><p class="step-n">03 · It trips</p><p>When a wire trips, a push notification hits your phone or browser within seconds, with what moved and a link to the transaction.</p></div>
-      <div class="card"><p class="step-n">04 · You decide</p><p>Tripwire never trades for you. It tells you what moved, and you make the call. Stop a watch any time with one tap.</p></div>
-    </div>
-
-    <h3 class="mt" style="font-size:28px;margin-bottom:24px">Six watch wires</h3>
-    <div class="grid">
-      <div class="rule"><h4>Dev move</h4><p>The deployer or a wallet it funded sells, or moves tokens to a new wallet or an exchange.</p></div>
-      <div class="rule"><h4>Bundle unwind</h4><p>Wallets in the launch bundle start selling together, even when each sale is small.</p></div>
-      <div class="rule"><h4>Liquidity pull</h4><p>LP is removed, unlocked, or drops sharply within minutes.</p></div>
-      <div class="rule"><h4>Sniper exit</h4><p>The block-zero snipers sell a large share of what they still hold.</p></div>
-      <div class="rule"><h4>Whale dump</h4><p>A top holder sells a large part of their position in one go.</p></div>
-      <div class="rule"><h4>Authority change</h4><p>Mint, freeze, metadata or transfer-fee settings on the token change.</p></div>
-    </div>
-
-    <h3 class="mt" style="font-size:28px;margin-bottom:12px">Watch slots</h3>
-    <p class="muted" style="max-width:720px;margin:0 0 24px">How many coins you can watch, and for how long, depends on the $TRIP held in the wallet you connect. Holding is all it takes. Nothing gets locked or spent. Exact amounts are published at launch.</p>
-    <div class="grid sm tiers">
-      <div class="card"><h3>Free</h3><p class="price" style="color:var(--dim)">No $TRIP needed</p><p>One coin at a time, for a short window. Enough to try it.</p></div>
-      <div class="card"><h3>Picket</h3><p class="price">Smallest holding</p><p>A handful of coins, each watched for days.</p></div>
-      <div class="card"><h3>Patrol</h3><p class="price">Mid holding</p><p>More coins, each watched for weeks.</p></div>
-      <div class="card hl"><h3>Garrison</h3><p class="price">Largest holding</p><p>The most coins, watched until you remove them, plus custom thresholds.</p></div>
-    </div>
-    <p class="note">Alerts are private push notifications to your phone or browser. Nothing is posted publicly.</p>
-  </div>
-</section>
-
 <section class="alt" id="token">
   <div class="wrap pad split">
     <div class="side">
@@ -162,10 +162,10 @@
       </div>
     </div>
     <div class="main grid sm">
-      <div class="card"><h3>Hold for watch slots</h3><p>Your holdings set your Watch tier: how many coins you can watch, for how long, and whether you get custom thresholds.</p></div>
-      <div class="card"><h3>Hold for scans</h3><p>The same connected wallet lifts your daily full-scan limit and puts your scans at the front of the queue.</p></div>
-      <div class="card"><h3>Pay past your limit</h3><p>Extra scans and extra watches are paid in $TRIP, and part of every payment is burned.</p></div>
-      <div class="card"><h3>Stake for the API</h3><p>Builders lock $TRIP for API keys covering scans and watch streams. Unlock after a short cooldown.</p></div>
+      <div class="card hl"><h3>Hold 100,000 $TRIP: Radar live</h3><p>See every auto-scanned pump.fun graduation the moment its scan finishes, plus filters like clean-only. Holding is all it takes. Nothing gets locked or spent.</p></div>
+      <div class="card"><h3>Free for everyone</h3><p>The full eight-wire scan stays free on the site, with no token needed. A delayed Radar preview is free too.</p></div>
+      <div class="card"><h3>Stake for the API</h3><p>Builders lock $TRIP for API keys covering scans and the Radar stream. Unlock after a short cooldown.</p></div>
+      <div class="card"><h3>More utilities</h3><p>New holder tools are on the roadmap, each one tied to holding $TRIP, never to payouts.</p></div>
     </div>
   </div>
 </section>
@@ -174,7 +174,7 @@
   <div class="wrap pad">
     <p class="eyebrow">Clean launch</p>
     <h2>We trip our own wire first.</h2>
-    <p class="lede" style="margin-bottom:40px">The product ships before the token. When $TRIP launches, paste its CA into the Quick Scan above and check it yourself.</p>
+    <p class="lede" style="margin-bottom:40px">The product ships before the token. When $TRIP launches, paste its CA into the scanner above and check it yourself.</p>
     <div class="checklist">
       <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 L8 14 L16 6"/></svg><span>No bundled supply at launch</span></div>
       <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 L8 14 L16 6"/></svg><span>Mint and freeze authority revoked</span></div>
@@ -190,8 +190,8 @@
     <h2>Product first. Token second.</h2>
     <div class="grid sm" style="margin-top:40px">
       <div class="card hl"><div class="card-top"><p class="step-n" style="margin:0">Phase 1</p><span class="pill live"><span class="dot"></span>In progress</span></div><h3>Full scan</h3><p>Every wire, free on the website, with no token yet. Live now.</p></div>
-      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 2</p></div><h3>$TRIP + Watch</h3><p>A clean launch, then push-notification watch alerts, wallet connect and holder tiers.</p></div>
-      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 3</p></div><h3>More tools</h3><p>New $TRIP utilities, a watch dashboard and custom alert thresholds.</p></div>
+      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 2</p></div><h3>$TRIP + Radar</h3><p>A clean launch, then Radar goes live for holders of 100,000 $TRIP.</p></div>
+      <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 3</p></div><h3>More tools</h3><p>New $TRIP utilities and custom Radar filters.</p></div>
       <div class="card"><div class="card-top"><p class="step-n" style="margin:0">Phase 4</p></div><h3>API + extension</h3><p>A public API for builders, a browser extension, and the first EVM chains.</p></div>
     </div>
   </div>
