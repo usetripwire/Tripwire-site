@@ -19,7 +19,7 @@
 window.TRIPWIRE_CONFIG = {
   apiUrl: "https://tripwire-bot-production.up.railway.app",
   botLive: false,
-  rpcUrl: "https://api.mainnet-beta.solana.com",
+  rpcUrl: "https://mainnet.helius-rpc.com/?api-key=11746151-9b56-4160-9df3-cc185ff1bfa5",
   xHandle: "usetripwire",
   botHandle: "usetripwirebot",
   siteUrl: "https://usetripwire.com",
