@@ -394,7 +394,7 @@
     var livePill = function (p, label) { p.className = "pill live"; p.replaceChildren(h("span", { class: "dot" }), document.createTextNode(label)); };
     if (API) {
       var note = document.getElementById("ca-note");
-      if (note) note.textContent = "Free and no wallet needed. Scans read public on-chain and DEX data and take about 10 to 30 seconds.";
+      if (note) note.textContent = "Free and no wallet needed. Scans read public on-chain and DEX data and usually take under a minute.";
       document.querySelectorAll("[data-full-pill]").forEach(function (p) { livePill(p, "Live now"); });
       var ph = document.querySelector("#result .placeholder");
       if (ph) ph.replaceChildren(
