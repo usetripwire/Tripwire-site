@@ -103,7 +103,10 @@
         var liq = function (p) { return (p.liquidity && p.liquidity.usd) || 0; };
         var mc = function (p) { return p.marketCap || p.fdv || 0; };
         pairs.forEach(function (p) { var own = mc(p); p._suspect = pairs.length > 1 && own > 0 && liq(p) > own * 2.05; });
-        return pairs.sort(function (a, b) { return (a._suspect - b._suspect) || (liq(b) - liq(a)); });
+        // Real pools first, then launch curves, then dust pools (a few dollars, often spam pairs)
+        var vol = function (p) { return (p.volume && p.volume.h24) || 0; };
+        var tier = function (p) { return p._suspect ? 3 : liq(p) >= 500 ? 0 : liq(p) > 0 ? 2 : 1; };
+        return pairs.sort(function (a, b) { return (tier(a) - tier(b)) || (tier(a) === 0 ? liq(b) - liq(a) : vol(b) - vol(a)); });
       });
   }
 
@@ -178,6 +181,7 @@
         "Selling " + usd(T.sellUsd) + " would move the price " + (slip < 0.1 ? "less than 0.1%" : "about " + pct(slip)) + " (estimate)."
       ].concat((function () {
         var mc = p.marketCap || p.fdv || 0;
+        if (liq < 500) return ["That is dust: a pool this small is usually a spam side pair, and no deeper pool or launch curve was found. Selling any real amount here is not possible."];
         return mc > 0 && liq >= mc * 0.6 && !p._suspect
           ? ["Liquidity is close to the market cap (" + usd(mc) + ") because the pool holds about " + Math.round(Math.min(100, liq / 2 / mc * 100)) + "% of the supply. That usually happens after heavy selling."]
           : [];
@@ -263,7 +267,7 @@
       var cells = [
         ["Price", price(pair.priceUsd)],
         ["Market cap", usd(pair.marketCap || pair.fdv)],
-        ["Liquidity", usd(pair.liquidity && pair.liquidity.usd)],
+        ["Liquidity", pair.onCurve || !(pair.liquidity && pair.liquidity.usd) ? "On launch curve" : usd(pair.liquidity.usd)],
         ["24h volume", usd(pair.volume && pair.volume.h24)],
         ["24h buys / sells", (tx.buys != null ? tx.buys : "—") + " / " + (tx.sells != null ? tx.sells : "—")],
         ["Pool age", age(pair.pairCreatedAt)]
