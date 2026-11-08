@@ -176,7 +176,12 @@
       name: "Exit", tripped: tripped, items: [
         "Deepest pool: " + usd(liq) + " liquidity on " + (p.dexId || "a DEX") + ".",
         "Selling " + usd(T.sellUsd) + " would move the price " + (slip < 0.1 ? "less than 0.1%" : "about " + pct(slip)) + " (estimate)."
-      ]
+      ].concat((function () {
+        var mc = p.marketCap || p.fdv || 0;
+        return mc > 0 && liq >= mc * 0.6 && !p._suspect
+          ? ["Liquidity is close to the market cap (" + usd(mc) + ") because the pool holds about " + Math.round(Math.min(100, liq / 2 / mc * 100)) + "% of the supply. That usually happens after heavy selling."]
+          : [];
+      })())
     };
   }
 
