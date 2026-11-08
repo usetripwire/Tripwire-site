@@ -274,6 +274,10 @@
     kids.push(h("div", { class: "r-foot" }, [
       h("p", { text: full === "full"
         ? "Automated estimates from on-chain data. A clear result is not a guarantee."
+        : full === "busy"
+          ? "Quick Scan only: full scans are busy right now, so only these checks ran. Try again in a minute for all eight wires. A clear result is not a guarantee."
+        : full === "limited"
+          ? "Quick Scan only: you've run a lot of full scans in the last minute. Wait a minute for all eight wires. A clear result is not a guarantee."
         : full === "fallback"
           ? "Quick Scan only: the full scan service didn't answer, so only these checks ran. A clear result is not a guarantee."
           : "Quick Scan only: the full scan isn't connected, so only these checks ran. A clear result is not a guarantee." }),
@@ -303,7 +307,7 @@
     try { history.replaceState(null, "", "?ca=" + mint + location.hash); } catch (e) {}
 
     var run = API
-      ? fullScan(mint).catch(function (e) { if (e && e.final) throw e; return quickScan(mint, "fallback"); })
+      ? fullScan(mint).catch(function (e) { if (e && e.final) throw e; return quickScan(mint, (e && e.mode) || "fallback"); })
       : quickScan(mint, "quick");
     run.catch(function (e) {
       renderError(e && e.message && !/^(rpc|dex|api)_/.test(e.message) ? e.message : "Something went wrong while scanning. Try again in a moment.");
@@ -317,6 +321,8 @@
     return fetch(API + "/api/scan?ca=" + encodeURIComponent(mint), { signal: withTimeout(180000) }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
         if (r.status === 400 || r.status === 422) { var e = new Error(j.message || "That address isn't a token mint."); e.final = true; throw e; }
+        if (j.error === "busy") { var b = new Error("busy"); b.mode = "busy"; throw b; }
+        if (r.status === 429) { var l = new Error("limited"); l.mode = "limited"; throw l; }
         if (!r.ok || !j.checks) throw new Error("api_" + r.status);
         renderResult(mint, j.token || { name: "Unknown token", symbol: "" }, j.checks, j.pair, "full");
       });
