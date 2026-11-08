@@ -405,6 +405,35 @@
 
     // status labels follow what is actually connected
     var livePill = function (p, label) { p.className = "pill live"; p.replaceChildren(h("span", { class: "dot" }), document.createTextNode(label)); };
+
+    // Launch mode: setting CFG.tokenCA switches the token section, roadmap and footer to live
+    if (CFG.tokenCA && B58.test(CFG.tokenCA)) {
+      var ca = CFG.tokenCA;
+      var tp = document.getElementById("token-pill");
+      if (tp) livePill(tp, "Live");
+      var box = document.getElementById("token-ca");
+      if (box) {
+        var onPump = /pump$/.test(ca);
+        box.replaceChildren(
+          h("p", { class: "eyebrow", style: "margin:0 0 8px", text: "$TRIP contract address" }),
+          h("div", { class: "ca-row" }, [h("code", { class: "ca-text", text: ca }), copyBtn(ca, "Copy $TRIP contract address")]),
+          h("div", { class: "r-actions", style: "margin-top:14px" }, [
+            h("a", { class: "btn btn-primary btn-sm", target: "_blank", rel: "noopener", href: onPump ? "https://pump.fun/coin/" + ca : "https://jup.ag/swap/SOL-" + ca, text: onPump ? "Buy on pump.fun" : "Buy on Jupiter" }),
+            onPump ? h("a", { class: "btn btn-ghost btn-sm", target: "_blank", rel: "noopener", href: "https://jup.ag/swap/SOL-" + ca, text: "Jupiter" }) : null,
+            h("a", { class: "btn btn-ghost btn-sm", target: "_blank", rel: "noopener", href: "https://dexscreener.com/solana/" + ca, text: "Chart" }),
+            h("a", { class: "btn btn-ghost btn-sm", href: "?ca=" + ca + "#scan", text: "Scan $TRIP" })
+          ]),
+          h("p", { class: "muted", style: "margin:12px 0 0;font-size:13px", text: "Always check the address. This is the only official $TRIP. Anything else is a copy." })
+        );
+        box.hidden = false;
+      }
+      var ph2 = document.getElementById("phase2");
+      if (ph2) {
+        ph2.classList.add("hl");
+        var top2 = ph2.querySelector(".card-top");
+        if (top2 && !top2.querySelector(".pill")) { var pp = h("span", {}); livePill(pp, "Live"); top2.appendChild(pp); }
+      }
+    }
     if (API) {
       var note = document.getElementById("ca-note");
       if (note) note.textContent = "Free and no wallet needed. Scans read public on-chain and DEX data and usually take under a minute.";
