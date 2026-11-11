@@ -19,6 +19,6 @@ window.TRIPWIRE_CONFIG = {
   rpcUrl: "https://mainnet.helius-rpc.com/?api-key=11746151-9b56-4160-9df3-cc185ff1bfa5",
   xHandle: "usetripwire",
   siteUrl: "https://usetripwire.com",
-  tokenCA: "",
+  tokenCA: "9Teaq2XGP7EZqdd5vQLJR3kFvyWMy71SpzJLMub8pump",
   contact: "hello@tripwire.example"
 };
